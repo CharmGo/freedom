@@ -1,13 +1,19 @@
 {
-  "name": "my-project",
+  "name": "vit",
   "version": "0.1.0",
+  "description": "Instant messaging program",
+  "main": "app/main.js",
+  "author": "CharmGo",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "npm run dev:h5",
     "build": "npm run build:h5",
+    "build:h5": "cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build",
+    "dev:pc": "electron .",
+    "preview": "npm run build:h5 && npm run dev:pc",
     "build:app-plus": "cross-env NODE_ENV=production UNI_PLATFORM=app-plus vue-cli-service uni-build",
     "build:custom": "cross-env NODE_ENV=production uniapp-cli custom",
-    "build:h5": "cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build",
     "build:mp-360": "cross-env NODE_ENV=production UNI_PLATFORM=mp-360 vue-cli-service uni-build",
     "build:mp-alipay": "cross-env NODE_ENV=production UNI_PLATFORM=mp-alipay vue-cli-service uni-build",
     "build:mp-baidu": "cross-env NODE_ENV=production UNI_PLATFORM=mp-baidu vue-cli-service uni-build",
@@ -41,7 +47,10 @@
     "test:h5": "cross-env UNI_PLATFORM=h5 jest -i",
     "test:ios": "cross-env UNI_PLATFORM=app-plus UNI_OS_NAME=ios jest -i",
     "test:mp-baidu": "cross-env UNI_PLATFORM=mp-baidu jest -i",
-    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i"
+    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "dependencies": {
     "@dcloudio/uni-app-plus": "^2.0.1-33520211229002",
@@ -62,6 +71,7 @@
     "@dcloudio/uni-stat": "^2.0.1-33520211229002",
     "@vue/shared": "^3.0.0",
     "core-js": "^3.6.5",
+    "electron-squirrel-startup": "^1.0.0",
     "flyio": "^0.6.2",
     "regenerator-runtime": "^0.12.1",
     "vue": "^2.6.11",
@@ -80,13 +90,24 @@
     "@dcloudio/vue-cli-plugin-uni-optimize": "^2.0.1-33520211229002",
     "@dcloudio/webpack-uni-mp-loader": "^2.0.1-33520211229002",
     "@dcloudio/webpack-uni-pages-loader": "^2.0.1-33520211229002",
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-wix": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-import": "^1.11.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.21.2",
     "cross-env": "^7.0.2",
+    "electron": "^16.0.6",
     "jest": "^25.4.0",
+    "jquery": "^3.6.0",
     "mini-types": "*",
     "miniprogram-api-typings": "*",
+    "portal-vue": "^2.1.7",
     "postcss-comment": "^2.0.0",
     "vue-template-compiler": "^2.6.11"
   },
@@ -96,5 +117,40 @@
   ],
   "uni-app": {
     "scripts": {}
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin",
+            "linux"
+          ],
+          "productName": "vit"
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "name": "vit",
+            "options": {
+              "maintainer": "CharmGo",
+              "homepage": "https://charmgo.run",
+              "productName": "vit"
+            }
+          },
+          "productName": "vit"
+        },
+        {
+          "name": "@electron-forge/maker-wix",
+          "config": {
+            "name": "vit",
+            "appUserModelId": "vit",
+            "manufacturer": "CharmGo"
+          }
+        }
+      ]
+    }
   }
 }
