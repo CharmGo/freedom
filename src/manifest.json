@@ -75,7 +75,7 @@
     },
     "h5" : {
         "title" : "vit",
-        "template" : "C:/Users/charm/Desktop/freedom/public/index.html",
+        "template" : "index.html",
         "router" : {
             "mode" : "hash",
             "base" : "./"

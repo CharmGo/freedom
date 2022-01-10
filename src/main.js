@@ -1,19 +1,12 @@
 import Vue from 'vue'
+import ElementUI from 'element-ui'
 import App from './App'
-// import bootstrap from 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-// Make BootstrapVue available throughout your project
-// Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-// Vue.use(IconsPlugin)
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 
 App.mpType = 'app'
-
+Vue.use(ElementUI)
 const app = new Vue({
   ...App
 })
